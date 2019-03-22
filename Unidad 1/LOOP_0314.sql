@@ -39,3 +39,21 @@ BEGIN
         V_MIN := V_MIN + 1;
     END LOOP;
 END;
+
+WHILE V_I >= 0
+        LOOP
+            SELECT DEPARTMENT_ID, DEPARTMENT_NAME
+            INTO V_ID, V_NOMBRE_DEPARTMENTS
+            FROM DEPARTMENTS
+            WHERE DEPARTMENT_ID = V_ID_DEP;
+            
+            SELECT COUNT(EMPLOYEE_ID) 
+            INTO V_CANT_EMPLOYEES
+            FROM EMPLOYEES 
+            WHERE DEPARTMENT_ID = V_ID;
+            
+            V_CANT_EMPLOYEES :=+ V_CANT_EMPLOYEES;
+            dbms_output.put_line('Department ID: ' || V_ID || ' Cant emp: ' || V_CANT_EMPLOYEES);
+            V_I := V_I - 1;
+            V_ID_DEP:= V_ID_DEP + 10;
+        END LOOP;
